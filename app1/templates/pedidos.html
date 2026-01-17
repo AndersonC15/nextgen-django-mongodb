@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Pedidos - NEXTGEN</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="{% url 'inicio' %}">🚀 NEXTGEN ADMIN</a>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="{% url 'lista_productos' %}">Productos</a>
+                <a class="nav-link" href="{% url 'lista_empleados' %}">Empleados</a>
+                <a class="nav-link" href="{% url 'lista_sucursales' %}">Sucursales</a>
+                <a class="nav-link" href="{% url 'lista_marcas' %}">Marcas</a>
+                <a class="nav-link active" href="{% url 'lista_pedidos' %}">Pedidos</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="fw-bold">Historial de Pedidos</h2>
+            <button class="btn btn-danger" disabled>📦 Registro Automático</button>
+        </div>
+
+        <div class="card shadow-sm">
+            <table class="table table-hover mb-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID Pedido</th>
+                        <th>Fecha y Hora</th>
+                        <th>Método de Pago</th>
+                        <th>Productos Detalle</th>
+                        <th class="text-center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for p in pedidos %}
+                    <tr>
+                        <td class="fw-bold">{{ p.id_pedido|default:"--" }}</td>
+                        <td>{{ p.fecha_hora|date:"d/m/Y H:i" }}</td>
+                        <td><span class="badge bg-secondary">{{ p.metodo_pago }}</span></td>
+                        <td>
+                            <ul class="list-unstyled mb-0 small">
+                                {% for item in p.productos %}
+                                <li>• Prod ID: {{ item.id_producto }} | Cant: {{ item.cantidad }} | Price: ${{ item.precio_en_pedido }}</li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                        <td class="text-center">
+                            {% if p.id_pedido %}
+                                <a href="{% url 'eliminar_pedido' p.id_pedido %}" class="btn btn-outline-danger btn-sm" onclick="return confirm('¿Anular este pedido?');">🗑️ Anular</a>
+                            {% else %}
+                                <span class="badge bg-warning text-dark">ID Faltante</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5" class="text-center py-4 text-muted">No hay pedidos registrados en el sistema.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="mt-4">
+            <a href="{% url 'inicio' %}" class="btn btn-secondary">Volver al Inicio</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,9 @@
+<h2>Productos</h2>
+{% for p in productos %}
+    {{ p.id_producto }} - {{ p.nombre }} - {{ p.precio_unitario }} <br>
+{% endfor %}
+
+<h2>Empleados</h2>
+{% for e in empleados %}
+    {{ e.id_empleado }} - {{ e.nombre }} - {{ e.puesto }} <br>
+{% endfor %}

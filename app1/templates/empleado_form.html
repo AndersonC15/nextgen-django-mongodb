@@ -1,0 +1,28 @@
+<div class="container py-5">
+    <div class="card shadow mx-auto" style="max-width: 500px;">
+        <div class="card-header bg-success text-white">
+            <h4 class="mb-0">{% if empleado %}Editar{% else %}Nuevo{% endif %} Empleado</h4>
+        </div>
+        <div class="card-body">
+            <form method="POST">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label class="form-label">Nombre</label>
+                    <input type="text" name="nombre" class="form-control" value="{{ empleado.nombre }}" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Apellido</label>
+                    <input type="text" name="apellido" class="form-control" value="{{ empleado.apellido }}" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Puesto</label>
+                    <input type="text" name="puesto" class="form-control" value="{{ empleado.puesto }}" required>
+                </div>
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary">Guardar Datos</button>
+                    <a href="{% url 'lista_empleados' %}" class="btn btn-secondary">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

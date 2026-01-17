@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Empleados - NEXTGEN</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="{% url 'inicio' %}">🚀 NEXTGEN ADMIN</a>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="{% url 'lista_productos' %}">Productos</a>
+                <a class="nav-link active" href="{% url 'lista_empleados' %}">Empleados</a>
+                <a class="nav-link" href="{% url 'lista_sucursales' %}">Sucursales</a>
+                <a class="nav-link" href="{% url 'lista_marcas' %}">Marcas</a>
+                <a class="nav-link" href="{% url 'lista_pedidos' %}">Pedidos</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container py-2">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="fw-bold">Gestión de Empleados</h2>
+            <a href="{% url 'crear_empleado' %}" class="btn btn-success">➕ Nuevo Empleado</a>
+        </div>
+
+        <div class="card shadow-sm">
+            <table class="table table-striped table-hover mb-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Puesto</th>
+                        <th class="text-center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for e in empleados %}
+                    <tr>
+                        <td>{{ e.id_empleado|default:"--" }}</td>
+                        <td>{{ e.nombre }}</td>
+                        <td>{{ e.apellido }}</td>
+                        <td><span class="badge bg-info text-dark">{{ e.puesto }}</span></td>
+                        <td class="text-center">
+                            {% if e.id_empleado %}
+                                <a href="{% url 'editar_empleado' e.id_empleado %}" class="btn btn-warning btn-sm">✏️</a>
+                                <a href="{% url 'eliminar_empleado' e.id_empleado %}" class="btn btn-danger btn-sm" onclick="return confirm('¿Eliminar empleado?');">🗑️</a>
+                            {% else %}
+                                <span class="badge bg-secondary">Dato corrupto</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="mt-4">
+            <a href="{% url 'inicio' %}" class="btn btn-secondary">Volver al Inicio</a>
+        </div>
+    </div>
+</body>
+</html>

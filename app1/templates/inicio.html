@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - NextGen</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .card-menu { transition: transform 0.3s; cursor: pointer; }
+        .card-menu:hover { transform: scale(1.05); }
+    </style>
+</head>
+<body class="bg-light">
+
+    <div class="container py-5">
+        <header class="text-center mb-5">
+            <h1 class="display-4 fw-bold text-dark">SISTEMA DE GESTIÓN NEXTGEN</h1>
+            <p class="lead text-muted">Panel Central de Administración</p>
+        </header>
+
+        <div class="row g-4 justify-content-center">
+            
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm card-menu border-primary" onclick="location.href='{% url 'lista_productos' %}'">
+                    <div class="card-body text-center">
+                        <h1 class="display-3">📦</h1>
+                        <h3 class="card-title text-primary">Productos</h3>
+                        <p class="card-text text-muted">Gestionar inventario, precios y stock.</p>
+                        <a href="{% url 'lista_productos' %}" class="btn btn-primary">Entrar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm card-menu border-success" onclick="location.href='{% url 'lista_empleados' %}'">
+                    <div class="card-body text-center">
+                        <h1 class="display-3">👥</h1>
+                        <h3 class="card-title text-success">Empleados</h3>
+                        <p class="card-text text-muted">Control de personal y cargos.</p>
+                        <a href="{% url 'lista_empleados' %}" class="btn btn-success">Entrar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm card-menu border-info" onclick="location.href='{% url 'lista_sucursales' %}'">
+                    <div class="card-body text-center">
+                        <h1 class="display-3">🏢</h1>
+                        <h3 class="card-title text-info">Sucursales</h3>
+                        <p class="card-text text-muted">Ubicaciones y datos de sucursal.</p>
+                        <a href="{% url 'lista_sucursales' %}" class="btn btn-info text-white">Entrar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm card-menu border-warning" onclick="location.href='{% url 'lista_marcas' %}'">
+                    <div class="card-body text-center">
+                        <h1 class="display-3">🏷️</h1>
+                        <h3 class="card-title text-warning">Marcas</h3>
+                        <p class="card-text text-muted">Registro de proveedores y fabricantes.</p>
+                        <a href="{% url 'lista_marcas' %}" class="btn btn-warning">Entrar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm card-menu border-danger" onclick="location.href='{% url 'lista_pedidos' %}'">
+                    <div class="card-body text-center">
+                        <h1 class="display-3">🛒</h1>
+                        <h3 class="card-title text-danger">Pedidos</h3>
+                        <p class="card-text text-muted">Historial de ventas y transacciones.</p>
+                        <a href="{% url 'lista_pedidos' %}" class="btn btn-danger">Entrar</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <footer class="mt-5 pt-4 text-center border-top">
+            <p class="text-secondary small">NextGen Loja - Conectado a: <strong>nextgen_db</strong> (MongoDB)</p>
+        </footer>
+    </div>
+
+</body>
+</html>
